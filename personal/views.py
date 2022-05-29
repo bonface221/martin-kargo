@@ -11,4 +11,7 @@ def categorySlide(request, slug):
   category = Category.objects.get(slug=slug)
   images = Image.objects.filter(category=category)
 
+  for x in images:
+    x.shortDescription = x.description[:120]
+
   return render(request, 'main/', locals())
