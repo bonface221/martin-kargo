@@ -9,5 +9,6 @@ def home(request):
 
 def categorySlide(request, slug):
   category = Category.objects.get(slug=slug)
+  images = Image.objects.filter(category=category)
 
   return render(request, 'main/', locals())
