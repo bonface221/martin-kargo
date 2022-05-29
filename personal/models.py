@@ -31,3 +31,14 @@ class Category(models.Model):
     if self.uniqueId is None:
       self.uniqueId = str(uuid4()).split('-')[4]
       self.slug = slugify('{} {}'.format(self.title, self.uniqueId))
+
+    self.slug = slugify('{} {}'.format(self.title, self.uniqueId))
+    self.last_updated = timezone.localtime(timezone.now())
+    super(Category, self).save(*args, **kwargs)
+
+class Image(models.Model):
+  name = models.CharField(max_length=100)
+  description = models.TextField(null=True, blank=True)
+  text = models.TextField(null=True, blank=True)
+
+
