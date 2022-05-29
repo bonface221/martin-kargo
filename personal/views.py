@@ -4,7 +4,8 @@ from .models import *
 # Create your views here.
 
 def home(request):
-  category = Category.objects.all()
+  categories = Category.objects.all() 
+
   return render(request, 'main/index.html', locals())
 
 def categorySlide(request, slug):
@@ -15,3 +16,9 @@ def categorySlide(request, slug):
     x.shortDescription = x.description[:120]
 
   return render(request, 'main/category.html', locals())
+
+def imageDetail(request, slug1, slug2):
+
+
+  return render(request, 'main/imageDetail.html', locals())
+
