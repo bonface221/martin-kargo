@@ -9,7 +9,7 @@ def home(request):
 
 def categorySlide(request, slug):
   category = Category.objects.get(slug=slug)
-  images = Image.objects.filter(category=category)
+  images = Image.objects.filter(category=category).order_by('-date_created')
 
   for x in images:
     x.shortDescription = x.description[:120]
