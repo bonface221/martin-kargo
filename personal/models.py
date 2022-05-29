@@ -46,3 +46,22 @@ class Image(models.Model):
   tallImage = ResizedImageField(size = [1618, 2878], crop = ['middle', 'center'], default = 'default_tall.jpg', upload_to = 'tall')
 
   category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
+
+  #utility variable
+  uniqueId = models.CharField(null=True, blank=True, max_length=100)
+  slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+  date_created = models.DateTimeField(blank=True, null=True)
+  last_updated = models.DateTimeField(blank=True, null=True)
+
+  def __str__(self):
+    return '{} {}'.format(self.category.title, self.uniqueId)
+
+  def get_absolute_url(self):
+    return reverse('image-detail', kwargs={'slug': self.slug})
+
+  def save(self, *args, **kwargs):
+    if self.date_created is None:
+      self.date_created = timezone.localtime(timezone.now())
+    if self.uniqueId is None:
+      self.uniqueId = str(uuid4()).split('-')[4]
+      self.slug = slugify('{} {}'.format(self.category.title, self.uniqueId))
