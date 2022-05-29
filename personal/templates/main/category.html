@@ -58,13 +58,12 @@
             <img src="{{image.landImage.url}}" alt="{{image.text}}">
 
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
+              <p class="card-text">{{image.shortDescription}}...</p>
+              <a class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <a href=""></a><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">{{image.date_created|date}}</small>
               </div>
             </div>
           </div>
