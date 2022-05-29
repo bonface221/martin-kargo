@@ -19,6 +19,8 @@ def categorySlide(request, slug):
 
 def imageDetail(request, slug1, slug2):
 
+  category = Category.objects.get(slug=slug1)
+  image = Image.objects.get(slug=slug2)
 
   return render(request, 'main/imageDetail.html', locals())
 
