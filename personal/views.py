@@ -7,5 +7,7 @@ def home(request):
   category = Category.objects.all()
   return render(request, 'main/index.html', locals())
 
-def categorySlide(request):
+def categorySlide(request, slug):
+  category = Category.objects.get(slug=slug)
+
   return render(request, 'main/', locals())
