@@ -37,9 +37,9 @@ class Category(models.Model):
     super(Category, self).save(*args, **kwargs)
 
 class Image(models.Model):
-  name = models.CharField(max_length=100)
+  title = models.CharField(max_length=100)
   description = models.TextField(null=True, blank=True)
-  # text = models.TextField(null=True, blank=True)
+  text = models.TextField(null=True, blank=True)
 
   squareImage = ResizedImageField(size = [1000, 1000], crop = ['middle', 'center'], default = 'default_square.jpg', upload_to = 'square')
   landImage = ResizedImageField(size = [2878, 1618], crop = ['middle', 'center'], default = 'default_land.jpg', upload_to = 'landscape')
@@ -69,3 +69,5 @@ class Image(models.Model):
     self.slug = slugify('{} {}'.format(self.category.title, self.uniqueId))
     self.last_updated = timezone.localtime(timezone.now())
     super(Image, self).save(*args, **kwargs)
+
+  

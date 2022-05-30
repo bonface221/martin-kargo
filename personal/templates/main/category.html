@@ -1,16 +1,48 @@
+{% load static %}
 
-{% extends 'main/base.html' %} 
-
-{% block content %}
-
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="generator" content="">
     <title>DeanKa Images</title>
 
+    <link rel="canonical" href="">
 
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+  </head>
+  <body>
+
+<header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white"></h4>
+          <h4 class="text-white">About</h4>
           <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
@@ -42,7 +74,9 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
+
         <h1 class="fw-light">{{category.title}}</h1>
+
       </div>
     </div>
   </section>
@@ -52,16 +86,18 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
+        {% if images|length > 0 %}
         {% for image in images %}
         <div class="col">
           <div class="card shadow-sm">
+
             <img src="{{image.landImage.url}}" alt="{{image.text}}">
 
             <div class="card-body">
-              <p class="card-text">{{image.shortDescription}}...</p>
-              <a class="d-flex justify-content-between align-items-center">
+              <p class="card-text">{{image.shortDescription}} . . . <a href="{% url 'image-details' slug1=category.slug slug2=image.slug %}">read more</a></p>
+              <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href=""></a><button type="button" class="btn btn-sm btn-outline-secondary">Image Details</button></a>
+                  <a href="{% url 'image-details' slug1=category.slug slug2=image.slug %}"><button type="button" class="btn btn-sm btn-outline-secondary">Image Details</button></a>
                 </div>
                 <small class="text-muted">{{image.date_created|date}}</small>
               </div>
@@ -69,7 +105,9 @@
           </div>
         </div>
         {% endfor %}
-
+        {% else %}
+        <h2>No Images Uploaded for this category</h2>
+        {% endif %}
 
       </div>
     </div>
@@ -79,13 +117,13 @@
 
 <footer class="text-muted py-5">
   <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
+    <p>Template adapted from Bootstrap 5 by <a href="#">DeanKa Images</a>.</p>
   </div>
 </footer>
 
 
-{% endblock %}
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+
+  </body>
+</html>
