@@ -70,4 +70,7 @@ class Image(models.Model):
     self.last_updated = timezone.localtime(timezone.now())
     super(Image, self).save(*args, **kwargs)
 
-  
+  @classmethod
+  def searching_image(cls, searched_item):
+    image = cls.objects.filter(name__icontains = searched_item)
+    return image
