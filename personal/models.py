@@ -70,4 +70,10 @@ class Image(models.Model):
     self.last_updated = timezone.localtime(timezone.now())
     super(Image, self).save(*args, **kwargs)
 
+  def upgrade(self):
+    self.delete()
+
+  def delete(self):
+    self.delete()
+
 
