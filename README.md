@@ -1,7 +1,7 @@
 # personal-gallery-application
 
-## Description : This is a personal gallery application that you display your photos by categories for others to see and search for a specific photo
-
+## Description : <p> This is a personal gallery application that you display your photos by categories for others to see and search for a specific photo
+ </p>
 ##### By Martin Kago
 
 ### pitches--third-attempt link : https://deanka.herokuapp.com/
