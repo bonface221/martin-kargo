@@ -24,14 +24,13 @@ def imageDetail(request, slug1, slug2):
 
   return render(request, 'main/image-detail.html', locals())
 
+    
+
+
 def search_image(request):
-  if 'image' in request.GET and request.GET['image']:
-    searched_item = request.GET['image']
-    images = Image.searching_image(searched_item)
-    term = f"{searched_item}"
-    return render(request,'main/search.html', locals())
+  if request.method == 'POST':
+    searched = request.POST['searched']
+    images = Image.objects.filter(title__contains=searched)
+    return render(request, 'main/search.html', locals())
   else:
-    term = "kindly input a search term"
-    return render(request,'main/search.html', locals())
-
-
+    return render(request, 'main/search.html', locals())

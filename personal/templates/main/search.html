@@ -75,7 +75,7 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
 
-        <h1 class="fw-light">{{category.title}}</h1>
+        <h1 class="fw-light">{{image.title}}</h1>
 
       </div>
     </div>
@@ -84,20 +84,31 @@
   <div class="album py-5 bg-light">
     <div class="container">
 
+
+      <div class="row">
+        {% if searched %}
+          <h2>you have {{images|length}} results</h2>
+        {% else %}
+          <h2>you have 0 results </h2>
+        {% endif %}
+      </div>
+      
+
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-        {% if images|length > 0 %}
+
+        {% if searched %}
         {% for image in images %}
         <div class="col">
           <div class="card shadow-sm">
 
-            <img src="{{image.landImage.url}}" alt="{{image.text}}">
+            <img src="{{image.landImage.url}}" alt="{{image.title">
 
             <div class="card-body">
-              <p class="card-text">{{image.shortDescription}} . . . <a href="{% url 'image-details' slug1=category.slug slug2=image.slug %}">read more</a></p>
+              <p class="card-text">{{image.title}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="{% url 'image-details' slug1=category.slug slug2=image.slug %}"><button type="button" class="btn btn-sm btn-outline-secondary">Image Details</button></a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Image Details</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary copy-btn" data-landImage.url="{{image.landImage.url}}">Copy Link</button>
                 </div>
                 <small class="text-muted">{{image.date_created|date}}</small>
@@ -107,7 +118,7 @@
         </div>
         {% endfor %}
         {% else %}
-        <h2>No Images Uploaded for this category</h2>
+        <h2>No Images available by that title</h2>
         {% endif %}
 
       </div>
@@ -118,7 +129,7 @@
 
 <footer class="text-muted py-5">
   <div class="container">
-    <p>Template adapted from Bootstrap 5 by <a href="#">DeanKa Images</a>.</p>
+    <p>Template adapted from Bootstrap 5 by <a href="#">Martin Kago</a>.</p>
   </div>
 </footer>
 
