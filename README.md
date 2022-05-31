@@ -4,7 +4,7 @@
  </p>
 ##### By Martin Kago
 
-### pitches--third-attempt link : https://deanka.herokuapp.com/
+### personal-gallery-application link : https://deanka.herokuapp.com/
 
 ## Table of Content
 
