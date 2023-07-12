@@ -25,6 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 MODE=config("MODE", default="dev")
+DATABASE_URL = 'postgresql://postgres:buTLv7NQzEMER4Ly4upL@containers-us-west-149.railway.app:7955/railway'
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
@@ -102,8 +104,8 @@ else:
        )
    }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 ALLOWED_HOSTS = ['*']
 
