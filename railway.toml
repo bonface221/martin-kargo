@@ -1,30 +1,36 @@
 [build]
-builder = "NIXPACKS"
-buildCommand = "railway connect Postgres"
+builder = "nixpacks"
+buildCommand = "echo building!"
 
 [deploy]
-numReplicas = 1
-restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 10
+startCommand = "echo starting!"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "never"
 
-providers = ["...", "python"]
+[build]
+watchPatterns = ["src/**"]
 
-[phases.setup]
-nixPkgs = ["...", "ffmpeg"]
+[build]
+dockerfilePath = "Dockerfile.backend"
 
-[phases.build]
-cmds = ["echo building!"]
+[deploy]
+startCommand = "echo starting"
 
-[start]
-cmd = "./start.sh"
+[deploy]
+numReplicas = 2
 
-[phases.lint]
-cmds = ["yarn run lint"]
-dependsOn = ["install"]
+[deploy]
+healthcheckPath = "/health"
 
-[phases.build]
-dependsOn = ["...", "lint"]
+[deploy]
+healthcheckTimeout = 300
 
-[phases.test]
-cmds = ["yarn run test"]
-dependsOn = ["build"]
+[deploy]
+restartPolicyType = "never"
+
+[deploy]
+restartPolicyMaxRetries = 5
+
+[environments.production.deploy]
+startCommand = "echo starting production!"
