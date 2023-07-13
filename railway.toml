@@ -9,9 +9,6 @@ healthcheckTimeout = 100
 restartPolicyType = "never"
 
 [build]
-watchPatterns = ["src/**"]
-
-[build]
 dockerfilePath = "Dockerfile.backend"
 
 [deploy]
