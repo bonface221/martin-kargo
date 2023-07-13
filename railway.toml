@@ -6,3 +6,25 @@ buildCommand = "railway connect Postgres"
 numReplicas = 1
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
+
+providers = ["...", "python"]
+
+[phases.setup]
+nixPkgs = ["...", "ffmpeg"]
+
+[phases.build]
+cmds = ["echo building!"]
+
+[start]
+cmd = "./start.sh"
+
+[phases.lint]
+cmds = ["yarn run lint"]
+dependsOn = ["install"]
+
+[phases.build]
+dependsOn = ["...", "lint"]
+
+[phases.test]
+cmds = ["yarn run test"]
+dependsOn = ["build"]
