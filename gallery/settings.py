@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -178,8 +179,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # configuring the location for media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Configure Django App for Heroku.
 # django_heroku.settings(locals())
+
+# adding cloudinary configs
+cloudinary.config(
+    cloud_name=config('cloud_name'),
+    api_key=config('api_key'),
+    api_secret=config('api_secret')
+)
