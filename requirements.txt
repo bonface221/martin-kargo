@@ -11,6 +11,7 @@ django-crispy-forms==1.10.0
 django-model-utils==4.1.0
 django-rating==0.1.5
 django-registration==3.1.1
+django-resized==1.0.2
 django-staticfiles==1.2.1
 djangorestframework==3.12.2
 dnspython==1.16.0
@@ -23,6 +24,8 @@ oauthlib==3.1.0
 packaging==20.3
 pbr==5.4.5
 pexpect==4.6.0
+Pillow==10.0.0
+psycopg2==2.9.6
 ptyprocess==0.7.0
 pyasn1==0.5.0
 pyasn1-modules==0.3.0
