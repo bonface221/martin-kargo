@@ -12,26 +12,25 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-# import django_heroku
-import dj_database_url
-from decouple import config,Csv
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-MODE=config("MODE", default="")
-DATABASE_URL = 'postgresql://postgres:buTLv7NQzEMER4Ly4upL@containers-us-west-149.railway.app:7955/railway'
+MODE = "DEV"
+# DATABASE_URL = 'postgresql://postgres:buTLv7NQzEMER4Ly4upL@containers-us-west-149.railway.app:7955/railway'
 
+
+DEBUT = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
 
@@ -80,13 +79,24 @@ WSGI_APPLICATION = 'gallery.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-SECRET_KEY = config('SECRET_KEY')
+
+# SQLlite
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 # DEBUG = config('DEBUG', default=False, cast=bool)
 # development
 # if config('MODE')=="dev":
 #    DATABASES = {
-#        'default': 
-#          {   
+#        'default':
+#          {
 #            'ENGINE': 'django.db.backends.postgresql',
 #            'NAME': config('DB_NAME'),
 #            'USER': config('DB_USER'),
@@ -94,7 +104,7 @@ SECRET_KEY = config('SECRET_KEY')
 #            'HOST': config('DB_HOST'),
 #            'PORT': '5432',
 #        }
-       
+
 #    }
 # production
 
@@ -102,11 +112,11 @@ SECRET_KEY = config('SECRET_KEY')
 #        'default': dj_database_url.config(
 #            default=config('DATABASE_URL')
 #        )
-DATABASES = {
-    'default': dj_database_url.config(
-        default=DATABASE_URL, conn_max_age=1800
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=DATABASE_URL, conn_max_age=1800
+#     )
+# }
 
 # db_from_env = dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(db_from_env)
@@ -146,16 +156,15 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = 'static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
